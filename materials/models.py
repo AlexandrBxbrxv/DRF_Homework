@@ -16,3 +16,6 @@ class Course(models.Model):
         verbose_name_plural = 'курсы'
 
 
+
+
+
