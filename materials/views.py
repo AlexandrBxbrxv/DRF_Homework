@@ -22,3 +22,8 @@ class LessonListAPI(generics.ListAPIView):
 class LessonRetrieveAPI(generics.RetrieveAPIView):
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
+
+
+class LessonUpdateAPI(generics.UpdateAPIView):
+    serializer_class = LessonSerializer
+    queryset = Lesson.objects.all()
