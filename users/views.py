@@ -6,11 +6,18 @@ from users.models import User, Payment
 from users.serializers import UserSerializer, PaymentSerializer
 
 
+# Read Update для User ##############################################
+class UserListAPI(generics.ListAPIView):
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
+
+
 class UserUpdateAPI(generics.UpdateAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
 
 
+# Read для Payment ##################################################
 class PaymentListAPI(generics.ListAPIView):
     serializer_class = PaymentSerializer
     queryset = Payment.objects.all()
