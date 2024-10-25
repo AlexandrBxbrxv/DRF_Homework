@@ -2,6 +2,8 @@ from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 from django.db import models
 
+from materials.models import Course, Lesson
+
 NULLABLE = {'blank': True, 'null': True}
 
 
@@ -35,3 +37,23 @@ class User(AbstractUser):
     class Meta:
         verbose_name = 'пользователь'
         verbose_name_plural = 'пользователи'
+
+
+class Payments(models.Model):
+
+    PAYMENT_METHOD_CHOICES = [
+        ("cash", "наличные"),
+        ("transfer to account", "перевод на счет"),
+    ]
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, **NULLABLE, related_name='payment_user',
+                             verbose_name='пользователь')
+    payment_date = models.DateField(auto_now=True, verbose_name='дата оплаты')
+
+    paid_course = models.ForeignKey(Course, on_delete=models.SET_NULL, **NULLABLE, related_name='payment_course',
+                                    verbose_name='оплаченный курс')
+    paid_lesson = models.ForeignKey(Lesson, on_delete=models.SET_NULL, **NULLABLE, related_name='payment_lesson',
+                                    verbose_name='оплаченный урок')
+
+    payment_amount = models.IntegerField(verbose_name='сумма оплаты')
+    payment_method = models.CharField(max_length=100, choices=PAYMENT_METHOD_CHOICES, verbose_name='способ оплаты')
