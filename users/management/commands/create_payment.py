@@ -1,14 +1,14 @@
 from django.core.management import BaseCommand
 
-from users.models import User, Payments
+from users.models import User, Payment
 from materials.models import Lesson
 
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        """Создает объект модели Payments"""
+        """Создает объект модели Payment"""
 
-        # создаем User для Payments
+        # создаем User для Payment
         User.objects.filter(pk=1).delete()
         User.objects.create(
             pk=1,
@@ -17,7 +17,7 @@ class Command(BaseCommand):
         )
         user = User.objects.get(pk=1)
 
-        # создаем Lesson для Payments
+        # создаем Lesson для Payment
         Lesson.objects.filter(pk=1).delete()
         Lesson.objects.create(
             pk=1,
@@ -26,9 +26,9 @@ class Command(BaseCommand):
         )
         lesson = Lesson.objects.get(pk=1)
 
-        # создаем Payments
-        Payments.objects.filter(pk=1).delete()
-        Payments.objects.create(
+        # создаем Payment
+        Payment.objects.filter(pk=1).delete()
+        Payment.objects.create(
             pk=1,
             user=user,
             paid_lesson=lesson,

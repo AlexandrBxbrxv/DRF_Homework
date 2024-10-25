@@ -39,7 +39,7 @@ class User(AbstractUser):
         verbose_name_plural = 'пользователи'
 
 
-class Payments(models.Model):
+class Payment(models.Model):
 
     PAYMENT_METHOD_CHOICES = [
         ("cash", "наличные"),
