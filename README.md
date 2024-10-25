@@ -5,11 +5,18 @@
 
 Заполните ".env.sample" своими данными и переименуйте его в ".env"
 
+Фикстуры: python manage.py loaddata fixtures\groups_data.json
+
 Кастомные команды: python manage.py create_payment
 
 Для запуска сайта: python manage.py runserver
 
 DevBlog
+
+`v.2`
+1. Добавлена библиотека django-filter и внесена в INSTALLED_APPS
+2. Модель Payments переименована в Payment
+3. Добавлен контроллер для просмотра списка Payment
 
 `v.1.1`
 1. Переопределён сериализатор для retrieve в CourseViewSet для вывода кол-ва уроков курса
