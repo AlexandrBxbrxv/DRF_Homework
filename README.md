@@ -5,13 +5,15 @@
 
 Заполните ".env.sample" своими данными и переименуйте его в ".env"
 
+Кастомные команды: python manage.py create_payment
+
 Для запуска сайта: python manage.py runserver
 
 DevBlog
 
 `v.1.1`
 1. Переопределён сериализатор для retrieve в CourseViewSet
-2. Добавлена модель Payments
+2. Добавлена модель Payments и команда создания объекта этой модели
 
 `v.1`
 1. Добавлены модели Course и Lesson
