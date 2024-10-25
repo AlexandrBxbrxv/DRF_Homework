@@ -12,8 +12,9 @@
 DevBlog
 
 `v.1.1`
-1. Переопределён сериализатор для retrieve в CourseViewSet
+1. Переопределён сериализатор для retrieve в CourseViewSet для вывода кол-ва уроков курса
 2. Добавлена модель Payments и команда создания объекта этой модели
+3. для CourseDetailSerializer добавлено поле lessons выводящее уроки курса
 
 `v.1`
 1. Добавлены модели Course и Lesson
