@@ -1,26 +1,46 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter
 from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
 
 from users.models import User, Payment
 from users.serializers import UserSerializer, PaymentSerializer
 
 
-# Read Update для User ##############################################
+# CRUD для User #####################################################
+class UserCreateAPI(generics.CreateAPIView):
+    serializer_class = UserSerializer
+
+
 class UserListAPI(generics.ListAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
+    permission_classes = [IsAuthenticated]
+
+
+class UserRetrieveAPI(generics.RetrieveAPIView):
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
+    permission_classes = [IsAuthenticated]
 
 
 class UserUpdateAPI(generics.UpdateAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
+    permission_classes = [IsAuthenticated]
+
+
+class UserDestroyAPI(generics.DestroyAPIView):
+    queryset = User.objects.all()
+    permission_classes = [IsAuthenticated]
 
 
 # Read для Payment ##################################################
 class PaymentListAPI(generics.ListAPIView):
     serializer_class = PaymentSerializer
     queryset = Payment.objects.all()
+    permission_classes = [IsAuthenticated]
+
     filter_backends = [DjangoFilterBackend, OrderingFilter]
     filterset_fields = ('paid_course', 'paid_lesson', 'payment_method',)
     ordering_filter = ('payment_date',)
