@@ -4,12 +4,12 @@ from rest_framework import generics
 from rest_framework.permissions import AllowAny
 
 from users.models import User, Payment
-from users.serializers import UserSerializer, PaymentSerializer
+from users.serializers import UserSerializer, PaymentSerializer, UserRegisterSerializer
 
 
 # CRUD для User #####################################################
 class UserCreateAPI(generics.CreateAPIView):
-    serializer_class = UserSerializer
+    serializer_class = UserRegisterSerializer
     queryset = User.objects.all()
     permission_classes = [AllowAny]
 
