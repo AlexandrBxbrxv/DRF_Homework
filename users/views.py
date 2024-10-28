@@ -10,6 +10,12 @@ from users.serializers import UserSerializer, PaymentSerializer
 # CRUD для User #####################################################
 class UserCreateAPI(generics.CreateAPIView):
     serializer_class = UserSerializer
+    queryset = User.objects.all()
+
+    def perform_create(self, serializer):
+        user = serializer.save(is_active=True)
+        user.set_password(user.password)
+        user.save()
 
 
 class UserListAPI(generics.ListAPIView):
