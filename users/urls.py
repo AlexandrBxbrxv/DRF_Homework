@@ -10,10 +10,10 @@ from users.views import UserUpdateAPI, PaymentListAPI, UserListAPI, UserCreateAP
 app_name = UsersConfig.name
 
 urlpatterns = [
-    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('register/', UserCreateAPI.as_view(), name='register'),
+    path('login/', TokenObtainPairView.as_view(), name='login'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
-    path('user/create/', UserCreateAPI.as_view(), name='user_create'),
     path('user/list/', UserListAPI.as_view(), name='user_list'),
     path('user/detail/<int:pk>/', UserRetrieveAPI.as_view(), name='user_detail'),
     path('user/update/<int:pk>/', UserUpdateAPI.as_view(), name='user_update'),
