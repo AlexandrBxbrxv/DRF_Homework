@@ -13,6 +13,9 @@
 
 DevBlog
 
+`v.3`
+1. Добавлена библиотека djangorestframework-simplejwt, внесена в INSTALLED_APPS
+
 `v.2`
 1. Добавлена библиотека django-filter и внесена в INSTALLED_APPS
 2. Модель Payments переименована в Payment
