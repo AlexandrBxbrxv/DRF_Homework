@@ -1,7 +1,7 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter
 from rest_framework import generics
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import AllowAny
 
 from users.models import User, Payment
 from users.serializers import UserSerializer, PaymentSerializer
@@ -11,6 +11,7 @@ from users.serializers import UserSerializer, PaymentSerializer
 class UserCreateAPI(generics.CreateAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
+    permission_classes = [AllowAny]
 
     def perform_create(self, serializer):
         user = serializer.save(is_active=True)
@@ -21,31 +22,26 @@ class UserCreateAPI(generics.CreateAPIView):
 class UserListAPI(generics.ListAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
-    permission_classes = [IsAuthenticated]
 
 
 class UserRetrieveAPI(generics.RetrieveAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
-    permission_classes = [IsAuthenticated]
 
 
 class UserUpdateAPI(generics.UpdateAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
-    permission_classes = [IsAuthenticated]
 
 
 class UserDestroyAPI(generics.DestroyAPIView):
     queryset = User.objects.all()
-    permission_classes = [IsAuthenticated]
 
 
 # Read для Payment ##################################################
 class PaymentListAPI(generics.ListAPIView):
     serializer_class = PaymentSerializer
     queryset = Payment.objects.all()
-    permission_classes = [IsAuthenticated]
 
     filter_backends = [DjangoFilterBackend, OrderingFilter]
     filterset_fields = ('paid_course', 'paid_lesson', 'payment_method',)
