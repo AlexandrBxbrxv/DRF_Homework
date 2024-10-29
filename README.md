@@ -9,6 +9,12 @@
 
 Кастомные команды: python manage.py create_payment, create_admin
 
+Для проверки задания, пользователь с группой moderator: 
+{
+"email": "moder@1.com",
+"password": 1
+}
+
 Для запуска сайта: python manage.py runserver
 
 DevBlog
@@ -17,6 +23,7 @@ DevBlog
 1. Добавлена библиотека djangorestframework-simplejwt, внесена в INSTALLED_APPS
 2. Добавлен CRUD для User, все контроллеры защищены авторизацией кроме создания пользователя и токенов
 3. Настроены доступы для группы moderator
+4. Добавлен доступ IsOwner, настроены доступы для Course и Lesson контроллеров
 
 `v.2`
 1. Добавлена библиотека django-filter и внесена в INSTALLED_APPS
