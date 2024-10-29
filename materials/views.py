@@ -1,8 +1,7 @@
 from rest_framework import viewsets, generics
-from rest_framework.permissions import IsAuthenticated
 
 from materials.models import Course, Lesson
-from materials.permissions import IsUserModerator
+from users.permissions import IsUserModerator
 from materials.serializers import CourseSerializer, LessonSerializer, CourseDetailSerializer
 
 
@@ -22,11 +21,21 @@ class CourseViewSet(viewsets.ModelViewSet):
             return CourseDetailSerializer
         return CourseSerializer
 
+    def perform_create(self, serializer):
+        course = serializer.save()
+        course.owner = self.request.user
+        course.save()
+
 
 # CRUD для Lesson ###################################################
 class LessonCreateAPI(generics.CreateAPIView):
     serializer_class = LessonSerializer
     permission_classes = [~IsUserModerator]
+
+    def perform_create(self, serializer):
+        lesson = serializer.save()
+        lesson.owner = self.request.user
+        lesson.save()
 
 
 class LessonListAPI(generics.ListAPIView):
