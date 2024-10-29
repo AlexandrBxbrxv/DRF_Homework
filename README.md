@@ -7,7 +7,7 @@
 
 Фикстуры: python manage.py loaddata fixtures\приложение_data.json
 
-Кастомные команды: python manage.py create_payment
+Кастомные команды: python manage.py create_payment, create_admin
 
 Для запуска сайта: python manage.py runserver
 
