@@ -44,6 +44,96 @@
     }
   },
   {
+    "model": "users.user",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$gYeUS522Qa4wzdGZZO1V1c$YKXc9gMuvgVtGIvpK8D4bZACZrA05ox5jWOtzbUlreU=",
+      "last_login": "2024-10-29T04:48:29.602Z",
+      "is_superuser": true,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-10-28T10:11:11.179Z",
+      "nickname": null,
+      "email": "admin@1.com",
+      "token": null,
+      "phone_number": null,
+      "city": null,
+      "avatar": "",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 4,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$Qj704RqALE2q1YvGaWmpxx$q4KHEUOh7EOa6Oak4lPgHVYvBAPAb7t5jUy4K3l6hiQ=",
+      "last_login": null,
+      "is_superuser": false,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-10-28T10:41:58.993Z",
+      "nickname": null,
+      "email": "user@1.com",
+      "token": null,
+      "phone_number": null,
+      "city": null,
+      "avatar": "",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 5,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$0MWrWOTRDM5KWQVW8dYlwi$PBI/jF24Zb6ydkbB6aqza45k/Wh7B2YvurgOkEyzl0E=",
+      "last_login": null,
+      "is_superuser": false,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-10-28T10:59:21.843Z",
+      "nickname": null,
+      "email": "user2@bk.com",
+      "token": null,
+      "phone_number": null,
+      "city": null,
+      "avatar": "",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 12,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$lVjwwF21MAzcMDfLzfkxZm$nU3pl0EOR6zYlpCbxidp64nQPEm8DArMWNQwazWaAoM=",
+      "last_login": null,
+      "is_superuser": false,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-10-29T05:00:41.628Z",
+      "nickname": null,
+      "email": "moder@1.com",
+      "token": null,
+      "phone_number": null,
+      "city": null,
+      "avatar": "",
+      "groups": [
+        1
+      ],
+      "user_permissions": []
+    }
+  },
+  {
     "model": "users.payment",
     "pk": 1,
     "fields": {
