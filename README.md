@@ -16,6 +16,7 @@ DevBlog
 `v.3`
 1. Добавлена библиотека djangorestframework-simplejwt, внесена в INSTALLED_APPS
 2. Добавлен CRUD для User, все контроллеры защищены авторизацией кроме создания пользователя и токенов
+3. Настроены доступы для группы moderator
 
 `v.2`
 1. Добавлена библиотека django-filter и внесена в INSTALLED_APPS
