@@ -1,6 +1,6 @@
 from rest_framework.serializers import ValidationError
 
-allowed_link = ("https://www.youtube.com/watch",)
+allowed_link = "https://www.youtube.com/watch"
 
 
 class VideoLinkValidator:
@@ -8,5 +8,6 @@ class VideoLinkValidator:
         self.field = field
 
     def __call__(self, value):
-        if allowed_link not in value:
+        tmp_val = dict(value).get(self.field)
+        if allowed_link not in tmp_val:
             raise ValidationError('Ссылка должна быть на ютуб')
