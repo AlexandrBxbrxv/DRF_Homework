@@ -30,8 +30,8 @@ class Lesson(models.Model):
     course = models.ForeignKey(Course, on_delete=models.SET_NULL, **NULLABLE, related_name='lesson_course',
                                verbose_name='курс')
 
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, **NULLABLE, related_name='lesson_owner',
-                              verbose_name='владелец')
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, **NULLABLE,
+                              related_name='lesson_owner', verbose_name='владелец')
 
     def __str__(self):
         return self.title

@@ -2,12 +2,14 @@ from rest_framework import viewsets, generics
 from rest_framework.permissions import IsAuthenticated
 
 from materials.models import Course, Lesson
+from materials.paginators import LessonPaginator, CoursePaginator
 from users.permissions import IsUserModerator, IsOwner
 from materials.serializers import CourseSerializer, LessonSerializer, CourseDetailSerializer
 
 
 class CourseViewSet(viewsets.ModelViewSet):
     queryset = Course.objects.all()
+    pagination_class = CoursePaginator
 
     def get_permissions(self):
         if self.action == 'create':
@@ -45,6 +47,7 @@ class LessonListAPI(generics.ListAPIView):
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
     permission_classes = [IsAuthenticated, IsUserModerator | IsOwner]
+    pagination_class = LessonPaginator
 
 
 class LessonRetrieveAPI(generics.RetrieveAPIView):

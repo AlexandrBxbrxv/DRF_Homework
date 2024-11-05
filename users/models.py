@@ -57,3 +57,14 @@ class Payment(models.Model):
 
     payment_amount = models.IntegerField(verbose_name='сумма оплаты')
     payment_method = models.CharField(max_length=100, choices=PAYMENT_METHOD_CHOICES, verbose_name='способ оплаты')
+
+
+class Subscription(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, **NULLABLE, related_name='subscription_user',
+                             verbose_name='пользователь')
+    course = models.ForeignKey(Course, on_delete=models.SET_NULL, **NULLABLE, related_name='subscription_course',
+                               verbose_name='курс')
+
+    class Meta:
+        verbose_name = 'подписка'
+        verbose_name_plural = 'подписки'
