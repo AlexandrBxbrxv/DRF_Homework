@@ -6,7 +6,8 @@ from rest_framework_simplejwt.views import (
 
 from django.urls import path
 from users.apps import UsersConfig
-from users.views import UserUpdateAPI, PaymentListAPI, UserListAPI, UserCreateAPI, UserRetrieveAPI, UserDestroyAPI
+from users.views import UserUpdateAPI, PaymentListAPI, UserListAPI, UserCreateAPI, UserRetrieveAPI, UserDestroyAPI, \
+    SubscriptionToggleAPIView
 
 app_name = UsersConfig.name
 
@@ -21,4 +22,6 @@ urlpatterns = [
     path('user/delete/<int:pk>/', UserDestroyAPI.as_view(), name='user_delete'),
 
     path('payment/list/', PaymentListAPI.as_view(), name='payment_list'),
+
+    path('sub_toggle/', SubscriptionToggleAPIView.as_view(), name='sub_toggle'),
 ]
