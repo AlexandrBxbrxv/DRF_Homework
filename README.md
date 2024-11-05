@@ -22,6 +22,7 @@ DevBlog
 `v.4`
 1. Добавлена валидация ссылки на ютуб
 2. Добавлена модель Subscription, реализован ендпоинт и вывод признака подписки в Course
+3. Добавлена пагинация для Course, Lesson
 
 `v.3`
 1. Добавлена библиотека djangorestframework-simplejwt, внесена в INSTALLED_APPS
