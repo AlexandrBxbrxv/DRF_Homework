@@ -9,5 +9,6 @@ class VideoLinkValidator:
 
     def __call__(self, value):
         tmp_val = dict(value).get(self.field)
-        if allowed_link not in tmp_val:
-            raise ValidationError('Ссылка должна быть на ютуб')
+        if tmp_val is not None:
+            if allowed_link not in tmp_val:
+                raise ValidationError('Ссылка должна быть на ютуб')
