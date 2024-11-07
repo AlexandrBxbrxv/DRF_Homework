@@ -46,17 +46,25 @@ class Payment(models.Model):
         ("transfer to account", "перевод на счет"),
     ]
 
+    payment_amount = models.PositiveIntegerField(verbose_name='сумма оплаты')
+    payment_method = models.CharField(max_length=100, choices=PAYMENT_METHOD_CHOICES, verbose_name='способ оплаты')
+    payment_date = models.DateField(auto_now=True, verbose_name='дата оплаты')
+    session_id = models.CharField(max_length=255, **NULLABLE, verbose_name='id сессии')
+    link = models.URLField(max_length=400, **NULLABLE, verbose_name='ссылка на оплату')
+
     user = models.ForeignKey(User, on_delete=models.CASCADE, **NULLABLE, related_name='payment_user',
                              verbose_name='пользователь')
-    payment_date = models.DateField(auto_now=True, verbose_name='дата оплаты')
-
     paid_course = models.ForeignKey(Course, on_delete=models.SET_NULL, **NULLABLE, related_name='payment_course',
                                     verbose_name='оплаченный курс')
     paid_lesson = models.ForeignKey(Lesson, on_delete=models.SET_NULL, **NULLABLE, related_name='payment_lesson',
                                     verbose_name='оплаченный урок')
 
-    payment_amount = models.IntegerField(verbose_name='сумма оплаты')
-    payment_method = models.CharField(max_length=100, choices=PAYMENT_METHOD_CHOICES, verbose_name='способ оплаты')
+    def __str__(self):
+        return self.payment_amount
+
+    class Meta:
+        verbose_name = 'оплата'
+        verbose_name_plural = 'оплаты'
 
 
 class Subscription(models.Model):

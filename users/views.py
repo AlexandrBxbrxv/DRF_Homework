@@ -1,4 +1,6 @@
 from django_filters.rest_framework import DjangoFilterBackend
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework.filters import OrderingFilter
 from rest_framework import generics
 from rest_framework.generics import get_object_or_404
@@ -9,6 +11,7 @@ from rest_framework.views import APIView
 from materials.models import Course
 from users.models import User, Payment, Subscription
 from users.serializers import UserSerializer, PaymentSerializer, UserRegisterSerializer
+from users.services import create_stripe_session
 
 
 # CRUD для User #####################################################
@@ -42,7 +45,20 @@ class UserDestroyAPI(generics.DestroyAPIView):
     queryset = User.objects.all()
 
 
-# Read для Payment ##################################################
+# Create, Read для Payment ##########################################
+class PaymentCreateAPI(generics.CreateAPIView):
+    """Эндпоинт оплаты курса."""
+    serializer_class = PaymentSerializer
+    queryset = Payment.objects.all()
+
+    def perform_create(self, serializer):
+        payment = serializer.save(user=self.request.user)
+        session_id, payment_link = create_stripe_session(payment)
+        payment.session_id = session_id
+        payment.link = payment_link
+        payment.save()
+
+
 class PaymentListAPI(generics.ListAPIView):
     serializer_class = PaymentSerializer
     queryset = Payment.objects.all()
@@ -52,8 +68,26 @@ class PaymentListAPI(generics.ListAPIView):
     ordering_filter = ('payment_date',)
 
 
+# Контроллер переключения Subscription ##############################
 class SubscriptionToggleAPIView(APIView):
-
+    @swagger_auto_schema(
+        operation_description="Add or delete subscription to course",
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'user': openapi.Schema(type=openapi.TYPE_INTEGER, description='integer or null (Пользователь)'),
+                'course': openapi.Schema(type=openapi.TYPE_INTEGER, description='integer or null (Курс)')
+            }
+        ),
+        responses={
+            200: openapi.Schema(
+                type=openapi.TYPE_OBJECT,
+                properties={
+                    'message': openapi.Schema(type=openapi.TYPE_STRING, description='message about result of action'),
+                }
+            ),
+        }
+    )
     def post(self, *args, **kwargs):
         user = self.request.user
         course_id = self.request.data.get('course')
