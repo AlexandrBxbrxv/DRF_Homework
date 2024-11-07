@@ -51,33 +51,6 @@ class PaymentCreateAPI(generics.CreateAPIView):
     serializer_class = PaymentSerializer
     queryset = Payment.objects.all()
 
-    @swagger_auto_schema(
-        operation_description="Course payment endpoint",
-        request_body=openapi.Schema(
-            type=openapi.TYPE_OBJECT,
-            required=[
-                'payment_amount', 'payment_method', 'user', 'paid_course'
-            ],
-            properties={
-                'payment_amount': openapi.Schema(type=openapi.TYPE_INTEGER, description='integer (Сумма)'),
-                'payment_method': openapi.Schema(type=openapi.TYPE_STRING, description='string (Метод оплаты)'),
-                'payment_date': openapi.Schema(type=openapi.FORMAT_DATE, description='date (Дата)'),
-                'session_id': openapi.Schema(type=openapi.TYPE_STRING, description='string (Id сессии)'),
-                'link': openapi.Schema(type=openapi.TYPE_STRING, description='string or null (Ссылка на оплату)'),
-
-                'user': openapi.Schema(type=openapi.TYPE_INTEGER, description='integer or null (Пользователь)'),
-                'paid_course': openapi.Schema(type=openapi.TYPE_INTEGER, description='integer or null (Курс)'),
-            }
-        ),
-        responses={
-            200: openapi.Schema(
-                type=openapi.TYPE_OBJECT,
-                properties={
-                    'link': openapi.Schema(type=openapi.TYPE_STRING, description='payment link'),
-                }
-            ),
-        }
-    )
     def perform_create(self, serializer):
         payment = serializer.save(user=self.request.user)
         session_id, payment_link = create_stripe_session(payment)
