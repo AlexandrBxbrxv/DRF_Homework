@@ -1,4 +1,7 @@
 from django_filters.rest_framework import DjangoFilterBackend
+from drf_yasg import openapi
+from drf_yasg.openapi import Schema
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework.filters import OrderingFilter
 from rest_framework import generics
 from rest_framework.generics import get_object_or_404
@@ -52,8 +55,26 @@ class PaymentListAPI(generics.ListAPIView):
     ordering_filter = ('payment_date',)
 
 
+# Контроллер переключения Subscription ##############################
 class SubscriptionToggleAPIView(APIView):
-
+    @swagger_auto_schema(
+        operation_description="Add or delete subscription to course",
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'user': openapi.Schema(type=openapi.TYPE_INTEGER, description='integer or null (Пользователь)'),
+                'course': openapi.Schema(type=openapi.TYPE_INTEGER, description='integer or null (Курс)')
+            }
+        ),
+        responses={
+            200: openapi.Schema(
+                type=openapi.TYPE_OBJECT,
+                properties={
+                    'message': openapi.Schema(type=openapi.TYPE_STRING, description='message about result of action'),
+                }
+            ),
+        }
+    )
     def post(self, *args, **kwargs):
         user = self.request.user
         course_id = self.request.data.get('course')
