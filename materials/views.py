@@ -1,3 +1,5 @@
+import datetime
+
 from rest_framework import viewsets, generics
 from rest_framework.permissions import IsAuthenticated
 
@@ -35,6 +37,7 @@ class CourseViewSet(viewsets.ModelViewSet):
     def update(self, request, *args, **kwargs):
         response = super().update(request, *args, **kwargs)
         course = self.get_object()
+        course.last_update = datetime.datetime.now()
         send_mail_about_course_update.delay(course=course.pk)
         return response
 
