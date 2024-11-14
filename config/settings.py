@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'django_filters',
     'drf_yasg',
+    'django_celery_beat',
 
     'users',
     'materials',
@@ -144,6 +145,13 @@ CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL')
 CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND')
 
 CELERY_TIMEZONE = os.getenv('CELERY_TIMEZONE')
+
+CELERY_BEAT_SCHEDULE = {
+    'check_last_login': {
+        'task': 'users.tasks.check_last_login',
+        'schedule': timedelta(days=1),
+    },
+}
 
 
 EMAIL_HOST = os.getenv('EMAIL_HOST')
