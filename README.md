@@ -21,6 +21,7 @@ DevLog
 
 `v.6`
 1. Добавлены библиотеки redis, celery, eventlet, django-celery-beat
+2. Настройка celery
 
 `v.5`
 1. Добавлена библиотека grf-yasg
