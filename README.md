@@ -17,7 +17,10 @@
 
 Для запуска сайта: python manage.py runserver
 
-DevBlog
+DevLog
+
+`v.6`
+1. Добавлены библиотеки redis, celery, eventlet, django-celery-beat
 
 `v.5`
 1. Добавлена библиотека grf-yasg
