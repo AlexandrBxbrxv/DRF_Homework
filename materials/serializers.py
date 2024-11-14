@@ -13,7 +13,7 @@ class LessonSerializer(serializers.ModelSerializer):
 
 
 class CourseSerializer(serializers.ModelSerializer):
-    is_subscribed = serializers.SerializerMethodField()
+    is_subscribed = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Course
@@ -26,8 +26,8 @@ class CourseSerializer(serializers.ModelSerializer):
 
 
 class CourseDetailSerializer(serializers.ModelSerializer):
-    is_subscribed = serializers.SerializerMethodField()
-    course_lessons_count = serializers.SerializerMethodField()
+    is_subscribed = serializers.SerializerMethodField(read_only=True)
+    course_lessons_count = serializers.SerializerMethodField(read_only=True)
     lessons = LessonSerializer(source='lesson_course', many=True)
 
     class Meta:
