@@ -1,8 +1,11 @@
+import datetime
+
 from rest_framework import viewsets, generics
 from rest_framework.permissions import IsAuthenticated
 
 from materials.models import Course, Lesson
 from materials.paginators import LessonPaginator, CoursePaginator
+from materials.tasks import send_mail_about_course_update
 from users.permissions import IsUserModerator, IsOwner
 from materials.serializers import CourseSerializer, LessonSerializer, CourseDetailSerializer
 
@@ -30,6 +33,13 @@ class CourseViewSet(viewsets.ModelViewSet):
         course = serializer.save()
         course.owner = self.request.user
         course.save()
+
+    def update(self, request, *args, **kwargs):
+        response = super().update(request, *args, **kwargs)
+        course = self.get_object()
+        course.last_update = datetime.datetime.now()
+        send_mail_about_course_update.delay(course=course.pk)
+        return response
 
 
 # CRUD для Lesson ###################################################
