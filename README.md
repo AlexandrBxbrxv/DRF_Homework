@@ -1,23 +1,20 @@
 # **Домашняя работа курса DRF**
 
-
-Создайте базу данных в PostgreSQL
-
+### Запуск
 Заполните ".env.sample" своими данными и переименуйте его в ".env"
+В консоль пропишите из папки проекта DRF_Homework>docker-compose build
+После загрузки пропишите DRF_Homework>docker-compose up
 
+###### Команды
 Фикстуры: python manage.py loaddata fixtures\приложение_data.json
-
 Кастомные команды: python manage.py create_payment, create_admin
 
-Для проверки задания, пользователь с группой moderator: 
-{
-"email": "moder@1.com",
-"password": 1
-}
-
-Для запуска сайта: python manage.py runserver
-
 DevLog
+
+`v.7`
+1. Оформлен Dockerfile
+2. Оформлен docker-compose.yaml
+3. Проект настроен на работу с докером
 
 `v.6`
 1. Добавлены библиотеки redis, celery, eventlet, django-celery-beat
